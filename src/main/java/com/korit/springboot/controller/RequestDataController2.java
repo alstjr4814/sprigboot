@@ -71,9 +71,10 @@ public class RequestDataController2 {
     }
 
 
-    @PatchMapping("/req/data3/{id}")
-    public ResponseEntity<?> reqDelate(@PathVariable int id) {
+    @DeleteMapping("/req/data1/{id}")
+    public ResponseEntity<?> reqDelete(@PathVariable int id, @RequestParam Map<String, Object> data) {
         System.out.println(id);
+        System.out.println(data);
         return ResponseEntity.ok().build();
     }
 }

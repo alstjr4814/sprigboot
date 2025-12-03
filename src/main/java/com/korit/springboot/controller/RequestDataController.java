@@ -15,7 +15,6 @@ public class RequestDataController {
     // Get /req/data 메서드명 :reqGet
 
     // Get 요청 파라미터 받는 방법 1 (서블릿에서 하는 방법)
-    @CrossOrigin("http://localhost:5173")
     @GetMapping("/req/data1")
     public ResponseEntity <Map<String, String>> reqGet1(HttpServletRequest request) {
         String name = request.getParameter("a");
