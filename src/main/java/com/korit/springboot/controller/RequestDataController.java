@@ -3,20 +3,19 @@ package com.korit.springboot.controller;
 import com.korit.springboot.dto.ReqDataDto6;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+
+@CrossOrigin
 @RestController
-public class RequestDtataController {
+public class RequestDataController {
 
     // Get /req/data 메서드명 :reqGet
-    // 200 응답을 했다.
 
     // Get 요청 파라미터 받는 방법 1 (서블릿에서 하는 방법)
+    @CrossOrigin("http://localhost:5173")
     @GetMapping("/req/data1")
     public ResponseEntity <Map<String, String>> reqGet1(HttpServletRequest request) {
         String name = request.getParameter("a");
@@ -44,7 +43,7 @@ public class RequestDtataController {
 
     // Get 요청 파라미터 받는 방법 4 - 해당 파라미터를 필수 항목으로 설정할 수 있다.
     // 정수 자료형의 파라미터가 필수가 아닐 때 Integer 자료형을 사용해야한다. ( null 처리 가능하기 때문)
-    @GetMapping("/req/data4")
+    @GetMapping("/req/data4") //건너 뜀
     public ResponseEntity <Map<String, String>> reqGet4(@RequestParam String name, @RequestParam(required = false) Integer age) {
         System.out.println("data4: " + name);
         System.out.println("data4: " + age);
@@ -52,7 +51,7 @@ public class RequestDtataController {
     }
 
     // Get 요청 파라미터 받는 방법 5
-    @GetMapping("/req/data5")
+    @GetMapping("/req/data5") //건너 뜀
     public ResponseEntity <Map<String, String>> reqGet5(
             @RequestParam String name,
             @RequestParam int age,
@@ -72,7 +71,7 @@ public class RequestDtataController {
     }
 
     // Get 요청 파라미터 받는 방법 7 - 주소에서 값가져오기
-    @GetMapping("/req/data7/{id}")
+    @GetMapping("/req/{path}/data7/{id}")
     public ResponseEntity <Map<String, String>> reqGet7(
             @PathVariable int id,
             @PathVariable String path,

@@ -1,10 +1,7 @@
 package com.korit.springboot.controller;
 
-import com.korit.springboot.dto.ReqDataDto6;
 import com.korit.springboot.dto.ReqFormDataDto4;
 import com.korit.springboot.dto.ReqJsonDto2;
-import jakarta.servlet.http.HttpServletRequest;
-import lombok.Data;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,8 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin
 @RestController
-public class RequestDtataController2 {
+public class RequestDataController2 {
 
     // POST 요청 데이터 받는 방법 1 - Map을 통해 JSON 데이터 받는 방법 cf.json형태로 받아야 한다.
     @PostMapping("/ewq/data1")
@@ -34,7 +32,7 @@ public class RequestDtataController2 {
 
     // POST 요청 데이터 받는 방법 3 - 파일 데이터 받는 방법
     // 파일 전송을 위해서는 요청 Content-Type이 꼭 multipart-form-data
-    @PostMapping(value = "/ewq/data3", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/req/data3", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> reqPost3(@RequestPart("file") MultipartFile file) {
         System.out.println(file.getOriginalFilename());
         return ResponseEntity.ok().build();
@@ -44,13 +42,14 @@ public class RequestDtataController2 {
     // 파일 전송을 위해서는 요청 Content-Type이 꼭 multipart-form-data
     @PostMapping(value = "/ewq/data4", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> reqPost4(ReqFormDataDto4 dto) {
+        System.out.println(dto);
         System.out.println(dto.getFile().getOriginalFilename());
         return ResponseEntity.ok().build();
     }
 
     // POST 요청 데이터 받는 방법 5 - 여러파일 데이터 받는 방법
     // 파일 전송을 위해서는 요청 Content-Type이 꼭 multipart-form-data
-    @PostMapping(value = "/req/data5", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/ewq/data5", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> reqPost5(@RequestPart("files") List<MultipartFile> files) {
         files.forEach(file -> System.out.println(file.getOriginalFilename()));
         return ResponseEntity.ok().build();
@@ -65,7 +64,7 @@ public class RequestDtataController2 {
     }
 
     //PATCH 요청 데이터 받는 방법 1 - JSON 데이터만 보통 사용
-    @PatchMapping("/req/data2/{id}")
+    @PatchMapping("/req/data1/{id}")
     public ResponseEntity<?> reqPath(@PathVariable int id, @RequestBody ReqJsonDto2 dto) {
         System.out.println(dto);
         return ResponseEntity.ok().build();
