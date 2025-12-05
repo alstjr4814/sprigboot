@@ -9,5 +9,5 @@ public class RespJsonDto {
     private String name;
     private String email;
     private List<String> strs;
-    private RespJsonDto2 respjsonDto2;
+    private RespJsonDto2 respJsonDto2;
 }
