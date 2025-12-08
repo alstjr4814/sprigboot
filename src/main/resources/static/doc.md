@@ -26,3 +26,13 @@ Dto가 swager한테 야 이런json형식으로 좀 짜줘라고 하면 swager해
 짜줘야하고 그 짠거를 entity에 저장이되고 controller한테 넘김 그리고 서비스에 던짐 서비스는 다양한 
 검사들을하고 예외가 없으면 mapper을 호출 mapper는 이제 sql형식으로 바꿔주고 바꿔 준 형식을 바티스가 
 xml한테 넘겨 줌 xml은 workbench로 넘겨서 저장 
+
+
+<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+    <version>4.0.0</version>
+</dependency>
+
+jdbc:mysql://192.168.2.101:3309/sb_study_minseok
