@@ -1,0 +1,61 @@
+정리를 할테니까 외워봐라(이해를 바라진 않는다)
+
+요구사항 - usercontroller에서 했던 것 처럼 변수의 데이터가 json형식으로 백엔드 서버로 요청이올거다
+
+재료
+- controller ;이거 준 이유 이새끼 보면 만들 줄 알아야한다는 말
+- dto file
+
+4가지 요구사항: CRUD를 요구한다. create 엔 post
+
+백엔드가 데이터를 받아 DB에 넣기 위해 Request DTO 설계부터 한다.. 그래서 post이면 dto부터 설계를 해라.
+dto를 만들떄 고려해야 할 것
+	- 1. 유효성검사 dto (validation)
+	- 2. Controller설계에 필요한 놈들
+		@ResrController, @Postmapping, @ReqeustBody(JSON) <-이새끼 무조건 필요함, @Valid
+		ResponseEntity<T> -> <T> = BodyDataType임
+
+part1
+post일때 얘기를 한다
+프론트 db intli j 요청 쪽
+-> dto
+-> controller
+
+part2
+db쪽 -DB table을 보고 만들어야 하는 클래스 ! 테이블 정보는 entity다.
+-> entity(userEntity) 만들기 -> entity는 클래스명이 테이블명 + entity  그리고 entity의 필드명은 db의 컬럼명과동일해야한다.
+-> mapper interface
+-> xml (namespace를 interface를 맞춰줘야 한다.) 이게 뭐가 동일하냐 implements랑 동일하다.
+-> 메서드 정리해야한다. (추상메서드) ->->
+-> Mapper에서 insert을 해야한다 return타입은 int로 cf. select아닌거 전부다 return타입 전부 int다 ->>> insert,update,delate 앞에 놈
+	int insert(Entity객체가 무조건 들어온다 이기야);
+	int update(Entity);
+	int delate(이건 int id);
+
+	insert같은경우 put이면 전체수정
+	update같은경우 patch이면 부분수정 cf. patch요청일때는 null이 있으면 안되니까 select를해서 들고와서 바꾸고싶은놈을 바꿔라 where문	에다가
+-> xml
+
+part3
+service
+프론트에서도 Dto를 만들었어 그리고 db쪽에서도 Entity를 만들었어
+그럼 Dto와 Entity를 연결을 해줘야 한다. 그걸 service가 한다.
+
+public void멀 리턴할지 모르니까 (매개변수.DTO)
+	DTO -> Entity로 변환해주는 과정
+		코드가 길어지니 toEntity을 사용하는데 dto안에는 toEntity가 들어가고 Entity에는 toDto가 들어간다.
+이딴걸 이제 service가 해주는거임
+
+
+일단 이렇게 부품을 잘 만들어야 한다. 그래야 오토와이어드로 나중에 연결해서 사용 할 수 있다.
+스프링부트 = 무조건 순서 controller -> service -> mapper 이어야 한다. 만드는순서가 아니고 계층구조 말하는거다
+만드는 구조는 controller랑 mapper중에 아무거나 골라 그리고 c 고르면 그다음 m 그다음 service 이렇게
+
+front -> tomcat -> filter -> servlet -> controller
+
+DB는 대소문자를 구분하는것도 있고 안하는것도 있음. 보통 snake 표기법 사용
+java는 상수일 경우에만 snake표기법 사용
+db에서 user_id라고 스네이크 표기법을 하면 java의 entity 에서 userId 이렇게 카멜표기법을 사용한다.
+
+
+
