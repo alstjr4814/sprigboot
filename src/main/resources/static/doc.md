@@ -36,3 +36,25 @@ xml한테 넘겨 줌 xml은 workbench로 넘겨서 저장
 </dependency>
 
 jdbc:mysql://192.168.2.101:3309/sb_study_minseok
+
+spring:
+application:
+name:
+datasource:
+driver-class-name: com.mysql.cj.jdbc.Driver
+url: jdbc:mysql://192.168.2.101:3309/sb_study_minseok
+username: root
+password: 1q2w3e4r
+
+jwt:
+secret: c52746715aef8b4e8cc6d38dee90e9a03d511f7f57bc3c819d8f3c735dedc294f67601ae8e0c2ea53dd9e4678dbfca2e57d9115e8163ccbe3c56532db236845f
+
+springdoc:
+swagger-ui:
+path: /doc
+
+mybatis:
+mapper-locations: classpath:mapper/**/*.xml
+configuration:
+map-underscore-to-camel-case: true
+type-aliases-package: com.korit.springboot.entity
