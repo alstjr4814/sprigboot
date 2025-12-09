@@ -1,7 +1,7 @@
 20251209
 https://inpa.tistory.com/entry/WEB-📚-JWTjson-web-token-란-💯-정리
-jwt.io/ja                                    //jwt공식 홈페이지
-https://jwtsecrets.com/                               //토큰아이디 발행 사이트
+jwt.io/ja                                                                   //jwt공식 홈페이지
+https://jwtsecrets.com/                                                     //토큰아이디 발행 사이트
 
 jwt토큰이 해독이 되면 header, payload, signature로 해독이 됨  결국 jwt을 만들어내고
 
