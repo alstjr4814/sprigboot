@@ -1,0 +1,29 @@
+20251209
+https://inpa.tistory.com/entry/WEB-📚-JWTjson-web-token-란-💯-정리
+jwt.io/ja                                    //jwt공식 홈페이지
+https://jwtsecrets.com/                               //토큰아이디 발행 사이트
+
+jwt토큰이 해독이 되면 header, payload, signature로 해독이 됨  결국 jwt을 만들어내고
+
+✔ Access Token은 5분 단위로 만료된다.
+✔ 만료 후에는 Refresh Token을 서버로 보내서 Access Token을 다시 발급받는다.
+
+
+하지만 ss토큰을 하루정도 주고싶다면
+public String createAccessToken(UserEntity userEntity) {
+    Date now = new Date();
+
+    // 1일 (24시간) 유효 기간
+    long expiredTime = now.getTime() + (1000L * 60 * 60 * 24);
+    Date expiredDate = new Date(expiredTime);
+
+    return Jwts.builder()
+            .subject("server access token")
+            .issuer("오민석")
+            .issuedAt(now)
+            .expiration(expiredDate)
+            .claim("userId", userEntity.getUserId())
+            .signWith(key, SignatureAlgorithm.HS256)
+            .compact();
+}
+해당 코드를 사용하면 된다. ic.  createAccessToken해당 함수를 호출을 하면

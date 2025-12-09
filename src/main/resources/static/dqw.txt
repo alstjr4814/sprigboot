@@ -1,0 +1,42 @@
+CREATE DEFINER=root@% PROCEDURE insert_user_ps(
+    in p_username varchar(255),
+    in p_password varchar(255),
+    in p_name varchar(255),
+    in p_email varchar(255),
+    out p_user_id int
+)
+BEGIN
+
+    declare role_name varchar(255) default 'ROLE_USER';
+    declare role_id int;
+
+    insert into user_tb
+    values (default, p_username, p_password, p_name, p_email);
+
+    set p_user_id = last_insert_id();
+
+    select role_id into v_role_id from role_tb where role_name = v_role_name;
+
+    insert into user_role_tb
+    values (default, p_user_id, v_role_id);
+
+END
+
+procedure을 사용 할 경우 tranjaction을 걸어서 예외처리를 해야 한다. 왜냐면
+각테이블에 값이 들어간느 tb이 있을 수 있고 값이 안들어가는 tb이 있을 수 있어서
+
+
+
+     user_tb ut
+            left outer join user_role_tb urt on (urt.user_id = ut.user_id)
+            left outer join role_tb rt on (rt.role_id = urt.role_id)
+
+
+--zz
+  @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return userEntity.getUserRoleEntities().stream()
+                .map(userRoleEntity ->
+                        new SimpleGrantedAuthority(userRoleEntity.getRoleEntity().getRoleName()))
+                .toList();
+    }

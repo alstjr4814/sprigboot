@@ -1,0 +1,71 @@
+$2a$10$U0xyx/2a8qg.C8zKkIfw8Ozm5Dqulekpylh0ItCL4W2Mkn74sfSqe
+
+h&X0vgI9P8^Opy<
+
+로그인하고
+로그인할때 패스워드는 회원가입했을 당시의 비밀번호 사용하고  username은 db에 잇는 username사용
+토큰생성 ->->-> -orb0u_kfcmy의 토큰 -> ps = h&X0vgI9P8^Opy<
+eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzZXJ2ZXIgYWNjZXNzIHRva2VuIiwiaXNzIjoi7Jik66-87ISdIiwiaWF0IjoxNzY1MjQ0MTUxLCJleHAiOjE3NjUzMzA1NTEsInVzZXJJZCI6MTB9.9ly_4jgTGptLYAmfvOz3eVHXEfUnxewAv1m4AwY01y0
+
+또 해당 토큰으로 https://jwtsecrets.com/ 에서 정보를 찾을수도 있다.
+
+OpenAPI openAPIConfig()
+
+매개변수에 Bearer이 붙으면 jwt라는 이야기다.
+
+만약 개별에 제한을 걸고 싶으면
+//                .addSecurityItem(securityRequirement)
+해당 addsecurity을 주석걸고
+
+SecurityRequirmentController에서 제한을 걸 class를 설정하면 제한을 걸 수 있다.
+
+
+authorize에 토큰을 넣으면
+security-requirement-controller의 f12 -> network -> security header의 authorization에 토큰을 볼 수 있다.
+
+그래서 bearerToken에 키값으로 Aurheization을 넣을 수 있다.
+
+JwtAuthenticationFilter은 문지기 역할(인가를 받는 위치) ic. 서버에서 자유롭게 돌아다닐 수 있게 끔
+
+문제가 생기면 token에서 header을 꺼내온다.
+if nul이거나 Bearer이 앞에 없으면 그냥 들여보낸다. 어짜피 아무것도 못하니까.
+
+그래서 dofilter가 두개가 있음; 그냥 보내는 dofilter랑 팔찌를 정상적으로 넘어가면 채워주는 dofilter
+SecurityContextHolder.getContext().setAuthentication(null); 해당부분이 팔찌를 채워주는 코드
+
+ss토큰 길게는 한달 또는 영구적으로 발급을 한다.
+하지만 중간에 탈퇴를 해도 ss토큰은 유효하다.
+그래서 jwtTokenProvider의 id를 찾는것까지는 유효하지만 그 뒤로 null로 리턴해준다.
+
+Swagger UI에서 JWT(Access Token)를 Authorization 헤더에 자동으로 넣을 수 있게 해주는 설정
+이란게 그니까 상표를 바꿔준다는 얘기야?
+@configuration은 어떤역할
+@Bean은
+
+openapi는 객체를 왜 생성 함
+
+authorization 헤더에서 bearer 읽기
+ 토큰이 없으면 -> 그냥 다음 필터로 통과
+  토큰 유효성 검증
+    토큰에서 userld 추출
+     db에서 사용자 찾기
+      유저가 존재하면 -> 인증 성공 처리
+	다음 필터 실행
+이런 구조닷
+
+procedures은 db의 함수
+``부분이 함수명 매개변수는 in(return값 없음, 입력값 전달용 )과 out(return값 있음)으로 이루어져 있다.
+begin ~end은 함수 {}내용부분
+delimeter $$ ~ end$$은 다른 쿼리가 있으면 넣어줘야 한다.
+CREATE PROCEDURE `insert_user_ps` (
+	in p_username varchar(255),
+    in p_password varchar(255),
+    in p_name varchar(255),
+    in p_email varchar(255),
+    out p_user_id int
+)
+BEGIN
+	insert into user_tb
+    values (default, p_username, p_password, p_name, p_email);
+END
+

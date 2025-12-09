@@ -49,9 +49,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        System.out.println(foundUser);
-
-        PrincipalUser principalUser = null;
+        PrincipalUser principalUser = new PrincipalUser(foundUser);
         String password = "";
         Collection<? extends GrantedAuthority> authorities = principalUser.getAuthorities();
 
@@ -60,5 +58,4 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         filterChain.doFilter(request, response);
     }
-
 }
