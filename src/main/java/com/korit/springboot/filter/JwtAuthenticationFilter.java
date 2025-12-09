@@ -34,8 +34,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
-        String accessToken = bearerToken.replaceAll("Bearer ", "");
 
+        String accessToken = bearerToken.replaceAll("Bearer ", "");
         if (!jwtTokenProvider.validateToken(accessToken)) {
             filterChain.doFilter(request, response);
             return;
@@ -43,7 +43,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         int userId = jwtTokenProvider.getUserId(accessToken);
         UserEntity foundUser = userMapper.findUserByUserId(userId);
-
         if (foundUser == null) {
             filterChain.doFilter(request, response);
             return;
@@ -58,4 +57,5 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         filterChain.doFilter(request, response);
     }
+
 }

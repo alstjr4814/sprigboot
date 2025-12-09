@@ -20,4 +20,3 @@ public class UserEntity {
 
     private List<UserRoleEntity> userRoleEntities;
 }
-

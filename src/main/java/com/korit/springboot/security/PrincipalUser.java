@@ -1,7 +1,7 @@
 package com.korit.springboot.security;
 
 import com.korit.springboot.entity.UserEntity;
-import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,6 +12,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 public class PrincipalUser implements UserDetails {
+    @Getter
     private final UserEntity userEntity;
 
     @Override
@@ -32,7 +33,7 @@ public class PrincipalUser implements UserDetails {
         return userEntity.getUsername();
     }
 
-    public  int getUserId() {
+    public int getUserId() {
         return userEntity.getUserId();
     }
 }

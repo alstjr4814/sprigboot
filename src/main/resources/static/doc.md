@@ -1,4 +1,6 @@
 //http://localhost:8080/doc
+http://localhost:3306/doc
+192.168.2.101:3309/sb_study_minseok
 DTO → Swagger에게 JSON 틀 제공
 Swagger가 그 형식대로 JSON 요청 생성
 그 요청이 Controller로 들어옴
